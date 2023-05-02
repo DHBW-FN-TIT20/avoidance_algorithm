@@ -2,10 +2,10 @@
 
 from ev3dev2.sensor.lego import UltrasonicSensor
 from ev3dev2.motor import *
-import time
+from ev3dev2.sensor import INPUT_1, INPUT_2
 
 us = UltrasonicSensor()
-lm = LargeMotor(OUTPUT_A)
+lm = LargeMotor(OUTPUT_C)
 
 #returns the angle of the next outer edge (0 degrees = direction of travel).
 def getAngle():
@@ -26,7 +26,7 @@ def getAngle():
 		else:
 			distanceOld = distance
 
-	lm.on_for_degrees(speed=SpeedDPS(90), degrees=-90, brake=True, block=True)
+	lm.on_for_degrees(speed=SpeedDPS(90), degrees=(lm.position)*-1, brake=True, block=True)
 	print("Zero Position: " + str(lm.position))
 	distanceOld = us.value()/10
 
@@ -43,6 +43,7 @@ def getAngle():
 			distanceOld = distance
 	
 	lm.off()
+	lm.on_for_degrees(speed=SpeedDPS(90), degrees=(positionL*-1), brake=True, block=True)
 
 	if positionR < (positionL * -1):
 		return positionR
