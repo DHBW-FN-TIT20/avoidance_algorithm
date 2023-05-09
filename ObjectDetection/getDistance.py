@@ -6,5 +6,3 @@ us = UltrasonicSensor()
 
 def getDistance():
 	return us.value()/10
-
-print(getDistance(), " cm")

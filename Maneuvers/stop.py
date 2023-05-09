@@ -6,5 +6,3 @@ lm = LargeMotor(OUTPUT_A)
 
 def stop():
 	lm.off()
-
-stop()

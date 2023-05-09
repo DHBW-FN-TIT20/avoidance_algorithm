@@ -25,5 +25,3 @@ def moveForwards():
 			while gyro.angle > 0:
 				print(str(gyro.angle))
 			steering.on_for_degrees(speed=SpeedDPS(90), degrees=((steering.position)*-1)+5, brake=True, block=False)
-
-moveForwards()

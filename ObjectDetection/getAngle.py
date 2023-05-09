@@ -16,7 +16,7 @@ def getAngle():
 
 	while lm.position < 90:
 		distance = us.value()/10
-		print(distance, "cm / " + str(lm.position) + "pos")
+		#print(distance, "cm / " + str(lm.position) + "pos")
 		lm.on(SpeedDPS(45), True)
 		
 		if (distance - distanceOld) >= 10:
@@ -27,12 +27,12 @@ def getAngle():
 			distanceOld = distance
 
 	lm.on_for_degrees(speed=SpeedDPS(90), degrees=(lm.position)*-1, brake=True, block=True)
-	print("Zero Position: " + str(lm.position))
+	#print("Zero Position: " + str(lm.position))
 	distanceOld = us.value()/10
 
 	while lm.position > -90:
 		distance = us.value()/10
-		print(distance, "cm / " + str(lm.position) + "pos")
+		#print(distance, "cm / " + str(lm.position) + "pos")
 		lm.on(SpeedDPS(-45), True)
 
 		if (distance - distanceOld) >= 10:
@@ -52,5 +52,4 @@ def getAngle():
 	else:
 		return 0
 
-print("Angle: " + str(getAngle()))
 
