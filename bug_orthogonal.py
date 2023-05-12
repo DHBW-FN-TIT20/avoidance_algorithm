@@ -60,8 +60,7 @@ else:
 
 while getDistance() < 25:
         drive.on(SpeedDPS(90), True)
-if getDistance() >= 25:
-	stop()
+stop()
 
 usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=(usMotor.position)*-1, brake=True, block=True)
 
