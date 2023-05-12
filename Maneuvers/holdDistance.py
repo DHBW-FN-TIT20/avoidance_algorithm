@@ -14,10 +14,6 @@ steering.position = 0
 
 usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=-80, brake=True, block=True)
 
-def turnStraight():
-        steering.on_for_degrees(speed=SpeedDPS(90), degrees=(steering.position)*-1, brake=True, block=True)
-
-# c = 20.5
 drive.on(speed=SpeedDPS(90))
 while True:
 
