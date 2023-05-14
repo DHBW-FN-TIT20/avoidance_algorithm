@@ -11,9 +11,10 @@ from Maneuvers.stop import stop
 from Maneuvers.turnRight import turnRight
 from Maneuvers.turnLeft import turnLeft
 import time
-from threading import Thread
+from threading import Thread, Event
 
-moveThread = Thread(target= moveForwards)
+event = Event()
+moveThread = Thread(target= moveForwards, args=(event,))
 
 us = UltrasonicSensor(INPUT_1)
 gyro = GyroSensor(INPUT_2)
@@ -30,10 +31,8 @@ gyro.reset()
 moveThread.start()
 
 while getDistance() >= 33:
-	#drive.on(SpeedDPS(90), True)
 	writeScreen(str(getDistance()))
-moveThread.join()
-stop()
+event.set()
 
 angle = getAngle()
 
