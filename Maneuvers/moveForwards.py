@@ -29,6 +29,5 @@ def moveForwards(event):
 		if event.is_set():
 			drive.off()
 			time.sleep(3)
-			steering.on_for_degrees(speed=SpeedDPS(90), degrees=((steering.position)*-1), brake=True, block=False)
 			break
 	print("moveThread closed")
