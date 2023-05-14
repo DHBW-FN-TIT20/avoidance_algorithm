@@ -11,9 +11,6 @@ from Maneuvers.stop import stop
 from Maneuvers.turnRight import turnRight
 from Maneuvers.turnLeft import turnLeft
 import time
-from threading import Thread
-
-#moveThread = Thread(target= moveForwards)
 
 us = UltrasonicSensor(INPUT_1)
 gyro = GyroSensor(INPUT_2)
