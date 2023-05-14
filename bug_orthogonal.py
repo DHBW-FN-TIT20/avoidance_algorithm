@@ -27,9 +27,10 @@ steering.position = 0
 gyro.calibrate()
 gyro.reset()
 
+moveThread.start()
+
 while getDistance() >= 33:
 	#drive.on(SpeedDPS(90), True)
-	moveThread.start()
 	writeScreen(str(getDistance()))
 moveThread.join()
 stop()
