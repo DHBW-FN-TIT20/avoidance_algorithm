@@ -17,15 +17,15 @@ usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=-80, brake=True, block=True)
 drive.on(speed=SpeedDPS(90))
 while True:
 
-	if us.value()/10 > 22:
-		steering.on_for_degrees(speed=SpeedDPS(90), degrees=30, brake=True, block=True)
-		while us.value()/10 > 20.5:
+	if us.value()/10 > 21:
+		steering.on_for_degrees(speed=SpeedDPS(90), degrees=65, brake=True, block=True)
+		while us.value()/10 > 20:
 			print(str(us.value()/10))
-		steering.on_for_degrees(speed=SpeedDPS(90), degrees=(steering.position)*-1, brake=True, block=True)
+		steering.on_for_degrees(speed=SpeedDPS(90), degrees=-70, brake=True, block=True)
 
 	if us.value()/10 < 19:
-		steering.on_for_degrees(speed=SpeedDPS(90), degrees=-30, brake=True, block=True)
-		while us.value()/10 < 20.5:
+		steering.on_for_degrees(speed=SpeedDPS(90), degrees=-65, brake=True, block=True)
+		while us.value()/10 < 20:
 			print(str(us.value()/10))
-		steering.on_for_degrees(speed=SpeedDPS(90), degrees=(steering.position)*-1, brake=True, block=True)
+		steering.on_for_degrees(speed=SpeedDPS(90), degrees=70, brake=True, block=True)
 
