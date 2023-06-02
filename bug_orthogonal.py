@@ -29,7 +29,8 @@ while getDistance() >= 33:
 	writeScreen(str(getDistance()))
 stop()
 
-angle = getAngle()
+#angle = getAngle()
+angle = 10
 
 if angle > 0:
 	turnRight(0)
