@@ -10,15 +10,8 @@ gyro = GyroSensor(INPUT_2)
 drive = LargeMotor(OUTPUT_A)
 steering = LargeMotor(OUTPUT_B)
 
-drive.position = 0
-steering.position = 0
-
 gyro.calibrate()
 gyro.reset()
-
-offset = 0
-oldAngle = gyro.angle
-newAngle = oldAngle
 
 # calculates the distance of the "opposite side" with sinus
 def calculateOffset(angle):
@@ -28,17 +21,30 @@ def calculateOffset(angle):
 	offset = math.sin(math.radians(angle)) * distance
 	return offset
 
-#drive.on(SpeedDPS(90), True)
-
-def offsetThread():
+def offsetThread(event):
+	offset = 0
+	oldAngle = gyro.angle
+	newAngle = oldAngle
+	print("--------------------------------")
 	while True:
+
+		if offset > 16.3 and offset < 16.7 and newAngle < 0:
+			print("angle: " + str(newAngle))
+			event.set()
+
 		drive.position = 0
 
 		while newAngle == oldAngle:
 			newAngle = gyro.angle
-			print("drive.position = " + str(drive.position))
+			if event.is_set():
+				break
+			#print("drive.position = " + str(drive.position))
 
 		offset = offset + calculateOffset(newAngle)
 		oldAngle = newAngle
-		print("old angle: " + str(oldAngle) + ", offset: " + str(offset))
+		#print("old angle: " + str(oldAngle) + ", offset: " + str(offset))
+		print("offset: " + str(offset))
+		if event.is_set():
+			print("event is set")
+			break
 
