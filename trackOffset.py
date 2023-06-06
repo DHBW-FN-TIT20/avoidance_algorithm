@@ -28,14 +28,17 @@ def calculateOffset(angle):
 	offset = math.sin(math.radians(angle)) * distance
 	return offset
 
-drive.on(SpeedDPS(90), True)
-while True:
+#drive.on(SpeedDPS(90), True)
 
-	while newAngle == oldAngle:
-		newAngle = gyro.angle
-		print("drive.position = " + str(drive.position))
-	offset = offset + calculateOffset(newAngle)
-	oldAngle = newAngle
-	drive.position = 0
-	print("old angle: " + str(oldAngle) + ", offset: " + str(offset))
+def offsetThread():
+	while True:
+		drive.position = 0
+
+		while newAngle == oldAngle:
+			newAngle = gyro.angle
+			print("drive.position = " + str(drive.position))
+
+		offset = offset + calculateOffset(newAngle)
+		oldAngle = newAngle
+		print("old angle: " + str(oldAngle) + ", offset: " + str(offset))
 
