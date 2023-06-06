@@ -18,35 +18,24 @@ gyro.reset()
 
 offset = 0
 oldAngle = gyro.angle
-positive = None
+newAngle = oldAngle
 
 # calculates the distance of the "opposite side" with sinus
 def calculateOffset(angle):
-	# the distance per degree of the turn radius
-	distance = 0.683
+	distance = drive.position
+	# translate the degrees of the motor in cm (1cm = 27,4 degree)
+	distance = distance / 27.4
 	offset = math.sin(math.radians(angle)) * distance
 	return offset
 
 drive.on(SpeedDPS(90), True)
 while True:
-	newAngle = gyro.angle
 
-	if newAngle == 90:
-		drive.position = 0
-		while gyro.angle == 90:
-			print(gyro.angle)
-		print("---------------- offset: " + str(offset))
-		offset = offset + (drive.position / 27.4)
-		print("---------------- new offset: " + str(offset))
-
-	if newAngle == -90:
-                drive.position = 0
-                while gyro.angle == -90:
-                        print(gyro.angle) 
-                offset = offset - (drive.position / 27.4)
-
-	if newAngle != oldAngle:
-		offset = offset + calculateOffset(newAngle)
-		oldAngle = newAngle
+	while newAngle == oldAngle:
+		newAngle = gyro.angle
+		print("drive.position = " + str(drive.position))
+	offset = offset + calculateOffset(newAngle)
+	oldAngle = newAngle
+	drive.position = 0
 	print("old angle: " + str(oldAngle) + ", offset: " + str(offset))
 
