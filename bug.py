@@ -12,12 +12,16 @@ from Maneuvers.stop import stop
 from Maneuvers.turnRight import turnRight
 from Maneuvers.turnLeft import turnLeft
 from Maneuvers.holdDistance import holdDistance
+import time
+import sys
 
 from threading import Thread, Event
 
 offsetEvent = Event()
+offsetEvent.clear()
 calcOffsetThread = Thread(target = offsetThread, args=(offsetEvent,))
 distanceEvent = Event()
+distanceEvent.clear()
 distanceThread = Thread(target = holdDistance, args=(distanceEvent,))
 
 us = UltrasonicSensor(INPUT_1)
@@ -38,28 +42,29 @@ drive.on(SpeedDPS(90), True)
 while getDistance() >= 33:
 	writeScreen("Distance: " + str(getDistance()))
 stop()
-steering.on_for_degrees(speed=SpeedDPS(90), degrees=-40, brake=True, block=True)
+steering.on_for_degrees(speed=SpeedDPS(90), degrees=-50, brake=True, block=True)
 usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=-80, brake=True, block=True)
-
+time.sleep(1)
 #start the calcOffsetThread
 calcOffsetThread.start()
 drive.on(SpeedDPS(90), True)
 
 # make a right turn until the distance is smaller or equal to 25cm
-while getDistance() >= 25:
+while getDistance() >= 20:
 	writeScreen("Distance:" + str(getDistance()))
 stop()
-steering.on_for_degrees(speed=SpeedDPS(90), degrees=40, brake=True, block=True)
-
+steering.on_for_degrees(speed=SpeedDPS(90), degrees=50, brake=True, block=True)
+time.sleep(1)
 #start the distanceThread to drive around the obstacle
-distanceThread.start()
 drive.on(SpeedDPS(90))
+distanceThread.start()
 
 
 #the car drives now around the obsticle until the offsetEvent is triggered
 while not(offsetEvent.is_set()):
 	writeScreen("degrees: " + str(gyro.angle))
-distanceEvent.set()
+if offsetEvent.is_set():
+	distanceEvent.set()
 stop()
 
 #the car drives now to the origin route
@@ -71,3 +76,4 @@ while gyro.angle != 0:
 stop()
 steering.on_for_degrees(speed=SpeedDPS(90), degrees=65, brake=True, block=True)
 usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=80, brake=True, block=True)
+exit()

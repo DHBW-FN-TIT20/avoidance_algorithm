@@ -22,11 +22,8 @@ def calculateOffset(angle):
 	return offset
 #calculates the relative distance to the route and returns True, if its time to drive to the route
 def returnToRoute(offset, angle):
-	if angle > 0:
-		return False
-
 	a = offset/(math.cos(math.radians(90 + angle)))
-	if a <= 25:
+	if a <= 25 and angle < 0:
 		return True
 	else:
 		return False
