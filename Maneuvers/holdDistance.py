@@ -10,8 +10,6 @@ steering = LargeMotor(OUTPUT_B)
 usMotor = LargeMotor(OUTPUT_C)
 
 def holdDistance(event):
-#move the us sensor to -80 degree
-	usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=-80, brake=True, block=True)
 
 	while True:
 
@@ -22,7 +20,6 @@ def holdDistance(event):
 
 				if event.is_set():
 					print("distance event is set")
-					usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=80, brake=True, block=True)
 					steering.on_for_degrees(speed=SpeedDPS(90), degrees=-70, brake=True, block=True)
 					break
 
@@ -37,5 +34,4 @@ def holdDistance(event):
 		
 		if event.is_set():
 			print("distance event is set")
-			usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=80, brake=True, block=True)
 			break

@@ -20,31 +20,33 @@ def calculateOffset(angle):
 	distance = distance / 27.4
 	offset = math.sin(math.radians(angle)) * distance
 	return offset
+#calculates the relative distance to the route and returns True, if its time to drive to the route
+def returnToRoute(offset, angle):
+	if angle > 0:
+		return False
+
+	a = offset/(math.cos(math.radians(90 + angle)))
+	if a <= 25:
+		return True
+	else:
+		return False
 
 def offsetThread(event):
 	offset = 0
 	oldAngle = gyro.angle
 	newAngle = oldAngle
-	print("--------------------------------")
 	while True:
 
-		if offset > 16.3 and offset < 16.7 and newAngle < 0:
-			print("angle: " + str(newAngle))
+		if returnToRoute(offset, newAngle):
 			event.set()
 
 		drive.position = 0
 
 		while newAngle == oldAngle:
 			newAngle = gyro.angle
-			if event.is_set():
-				break
 			#print("drive.position = " + str(drive.position))
 
 		offset = offset + calculateOffset(newAngle)
 		oldAngle = newAngle
 		#print("old angle: " + str(oldAngle) + ", offset: " + str(offset))
-		print("offset: " + str(offset))
-		if event.is_set():
-			print("event is set")
-			break
 

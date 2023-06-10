@@ -38,7 +38,7 @@ drive.on(SpeedDPS(90), True)
 while getDistance() >= 33:
 	writeScreen("Distance: " + str(getDistance()))
 stop()
-steering.on_for_degrees(speed=SpeedDPS(90), degrees=-65, brake=True, block=True)
+steering.on_for_degrees(speed=SpeedDPS(90), degrees=-40, brake=True, block=True)
 usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=-80, brake=True, block=True)
 
 #start the calcOffsetThread
@@ -49,8 +49,7 @@ drive.on(SpeedDPS(90), True)
 while getDistance() >= 25:
 	writeScreen("Distance:" + str(getDistance()))
 stop()
-steering.on_for_degrees(speed=SpeedDPS(90), degrees=65, brake=True, block=True)
-usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=80, brake=True, block=True)
+steering.on_for_degrees(speed=SpeedDPS(90), degrees=40, brake=True, block=True)
 
 #start the distanceThread to drive around the obstacle
 distanceThread.start()
@@ -62,12 +61,13 @@ while not(offsetEvent.is_set()):
 	writeScreen("degrees: " + str(gyro.angle))
 distanceEvent.set()
 stop()
+
+#the car drives now to the origin route
 steering.on_for_degrees(speed=SpeedDPS(90), degrees=-65, brake=True, block=True)
 drive.on(SpeedDPS(90))
 
-#the car drives now to the origin route
 while gyro.angle != 0:
 	writeScreen(str(gyro.angle))
 stop()
 steering.on_for_degrees(speed=SpeedDPS(90), degrees=65, brake=True, block=True)
-
+usMotor.on_for_degrees(speed=SpeedDPS(90), degrees=80, brake=True, block=True)
