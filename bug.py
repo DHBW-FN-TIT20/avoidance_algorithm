@@ -52,13 +52,14 @@ drive.on(SpeedDPS(90), True)
 # make a right turn until the distance is smaller or equal to 25cm
 while getDistance() >= 20:
 	writeScreen("Distance:" + str(getDistance()))
+	if(gyro.angle > 90):
+		break
 stop()
 steering.on_for_degrees(speed=SpeedDPS(90), degrees=50, brake=True, block=True)
-time.sleep(1)
-#start the distanceThread to drive around the obstacle
-drive.on(SpeedDPS(90))
-distanceThread.start()
 
+#start the distanceThread to drive around the obstacle
+distanceThread.start()
+drive.on(SpeedDPS(90))
 
 #the car drives now around the obsticle until the offsetEvent is triggered
 while not(offsetEvent.is_set()):
