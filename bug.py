@@ -6,11 +6,7 @@ from ev3dev2.sensor import INPUT_1, INPUT_2
 from Helper.printText import writeScreen
 from Helper.trackOffset import offsetThread
 from ObjectDetection.getDistance import getDistance
-from ObjectDetection.getAngle import getAngle
-from Maneuvers.moveForwards import moveForwards
 from Maneuvers.stop import stop
-from Maneuvers.turnRight import turnRight
-from Maneuvers.turnLeft import turnLeft
 from Maneuvers.holdDistance import holdDistance
 import time
 import sys

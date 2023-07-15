@@ -5,7 +5,6 @@ import time
 from ev3dev2.motor import *
 from ev3dev2.sensor.lego import GyroSensor
 from ev3dev2.sensor import INPUT_2
-from Helper.printText import writeScreen
 
 gyro = GyroSensor(INPUT_2)
 drive = LargeMotor(OUTPUT_A)
@@ -21,6 +20,7 @@ def calculateOffset(angle):
 	distance = distance / 27.4
 	offset = math.sin(math.radians(angle)) * distance
 	return offset
+
 #calculates the relative distance to the route and returns True, if its time to drive to the route
 def returnToRoute(offset, angle):
 	a = offset/(math.cos(math.radians(90 + angle)))

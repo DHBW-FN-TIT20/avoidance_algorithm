@@ -16,10 +16,8 @@ def holdDistance(event):
 		if us.value()/10 > 21:
 			steering.on_for_degrees(speed=SpeedDPS(90), degrees=65, brake=True, block=True)
 			while us.value()/10 > 20:
-				#print(str(us.value()/10))
 
 				if event.is_set():
-					print("distance event is set")
 					steering.on_for_degrees(speed=SpeedDPS(90), degrees=-70, brake=True, block=True)
 					break
 
@@ -28,10 +26,8 @@ def holdDistance(event):
 		if us.value()/10 < 19:
 			steering.on_for_degrees(speed=SpeedDPS(90), degrees=-65, brake=True, block=True)
 			while us.value()/10 < 20:
-				#print(str(us.value()/10))
 				drive.on(speed=SpeedDPS(90))
 			steering.on_for_degrees(speed=SpeedDPS(90), degrees=70, brake=True, block=True)
 		
 		if event.is_set():
-			print("distance event is set")
 			break
