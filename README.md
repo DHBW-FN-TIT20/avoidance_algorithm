@@ -18,7 +18,6 @@ Die Anschließende Integration des Algorithmus soll in einem Testmodell bzw. ein
 |||
 |---|---|
 |Verfasser| Lukas Adrion <[LukasAdrion](https://github.com/LukasAdrion)> <br/> Christoph Koßlowski <[Chri5K01](https://github.com/Chri5K0)><br/> Thibault Rey<[Thibse](https://github.com/Thibse)> |
-|Realisierung|[Git-Repo](#) (undefined)|
 
 ### :gear: Python Projekt
 
