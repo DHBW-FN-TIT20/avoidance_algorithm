@@ -1,4 +1,4 @@
-## Studenarbeit
+## Studienarbeit Implementierung
 
 ### :clipboard: Titel
 Entwicklung und Implementierung eines Ausweichalgorithmus zur Kollisionsprävention von Objekten mit Wiederaufnahme der Ursprungsroute.
